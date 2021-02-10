@@ -59,13 +59,13 @@
 //#include <GxCTRL/GxCTRL_ILI9481/GxCTRL_ILI9481.h> // HVGA 320x480
 //#include <GxCTRL/GxCTRL_ILI9488/GxCTRL_ILI9488.h> // 320x480 e.g. 3.5inch RPI Display
 //#include <GxCTRL/GxCTRL_ILI9806/GxCTRL_ILI9806.h> // 854x480 e.g. Tiky 5" TFT from Ruijia Industry
-//#include <GxCTRL/GxCTRL_SSD1963/GxCTRL_SSD1963.h> // 320x480 e.g. 3.5inch RPI Display
+#include <GxCTRL/GxCTRL_SSD1963/GxCTRL_SSD1963.h> // 320x480 e.g. 3.5inch RPI Display
 //#include <GxCTRL/GxCTRL_OTM8009A/GxCTRL_OTM8009A.h> // 800x480 e.g. "IPS 3.97 inch 16.7M HD TFT" from Ruijia Industry
 //#include <GxCTRL/GxCTRL_OTM8009A_RV047/GxCTRL_OTM8009A_RV047.h> // 854x480 e.g. RV047 4.7" TFT from Ruijia Industry
 
 // ***> create instance for the selected GxIO class  (or select a pre-configured display below) <***
 // *************************************************************************************************
-//GxIO_Class io; // #define GxIO_Class is in the selected header file
+GxIO_Class io; // #define GxIO_Class is in the selected header file
 
 // ***> or create instance for SPI, the constructor needs parameters (or ...) <***
 // *******************************************************************************
@@ -77,7 +77,7 @@
 
 // ***> create instance for the selected GxCTRL class  (or select a pre-configured display below) <***
 // ***************************************************************************************************
-//GxCTRL_Class controller(io); // #define GxCTRL_Class is in the selected header file
+GxCTRL_Class controller(io); // #define GxCTRL_Class is in the selected header file
 
 // ***> select one or adapt (or select a pre-configured display below) <***
 // ************************************************************************
@@ -87,7 +87,7 @@
 //TFT_Class tft(io, controller, 320, 480); // portrait HVGA 320x480 or 3.5inch RPI Display
 //TFT_Class tft(io, controller, 480, 320); // landscape HVGA 320x480 or 3.5inch RPI Display
 //TFT_Class tft(io, controller, 480, 800); // portrait 800x480 7inch Display
-//TFT_Class tft(io, controller, 800, 480); // landscape 800x480 7inch Display
+TFT_Class tft(io, controller, 800, 480); // landscape 800x480 7inch Display
 //TFT_Class tft(io, controller, 480, 854); // portrait 854x480 e.g. Tiky 5" TFT from Ruijia Industry
 //TFT_Class tft(io, controller, 854, 480); // landscape 854x480 e.g. Tiky 5" TFT from Ruijia Industry
 
@@ -110,7 +110,7 @@
 //#include "myTFTs/my_5_Tiky_854x480_DUE.h"
 //#include "myTFTs/my_5_Tiky_854x480_STM32F103C.h"
 //#include "myTFTs/my_5_Tiky_854x480_STM32F103V.h"
-#include "myTFTs/my_7_SSD1963_800x480_DUE.h"
+//#include "myTFTs/my_7_SSD1963_800x480_DUE.h"
 //#include "myTFTs/my_7_Waveshare_800x480_SPI.h"
 //#include "myTFTs/my_7_Waveshare_800x480_SPI_DUE.h"
 //#include "myTFTs/my_7_Waveshare_800x480_CTE_DUE.h"
@@ -464,7 +464,7 @@ void setup()
 
   pinMode(PD12, OUTPUT);
   digitalWrite(PD12, HIGH);
-
+  
   Serial.println("tft.init() done");
 
   reportID();
