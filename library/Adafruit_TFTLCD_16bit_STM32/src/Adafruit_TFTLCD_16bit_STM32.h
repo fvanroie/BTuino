@@ -54,7 +54,8 @@
 #if defined STM32F2xx
 	#include <sram.h>
 #else
-	#include <libmaple/fsmc.h>
+	#include <sram.h>
+//	#include <libmaple/fsmc.h>
 #endif
 
 
