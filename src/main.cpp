@@ -86,7 +86,8 @@ void setup()
 		 * https://github.com/lvgl/lv_examples*/
   //lv_ex_btn_1();
 
-  lv_demo_widgets();
+  lv_demo_music();
+  //lv_demo_widgets();
   //lv_demo_stress();
 }
 
