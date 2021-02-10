@@ -145,8 +145,6 @@ void GxCTRL_SSD1963::readRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, ui
 #define SSD_HPS (SSD_HOR_BACK_PORCH)
 #define SSD_VT (SSD_VER_RESOLUTION + SSD_VER_BACK_PORCH + SSD_VER_FRONT_PORCH)
 #define SSD_VPS (SSD_VER_BACK_PORCH)
-#define Delay_ms delay
-#define Delay_us delayMicroseconds
 
 // SSD1963  resolution max:864*480
 #define SSD_HOR_RESOLUTION 800 //LCD_WIDTH  // LCD width pixel
@@ -209,12 +207,13 @@ void GxCTRL_SSD1963::init()
   IO.writeData(0x00);
   IO.writeData(0x00);
 
+
   IO.writeCommand(0xF0); // Set pixel data interface format
   IO.writeData(0x03);    // 16-bit(565 format) data for 16bpp
   IO.writeCommand(0x29); // Set display on
-
-  IO.writeCommand(0x36); // Set address mode
-  IO.writeData(0x00);
+  
+  IO.writeCommand(0x36); //rotation
+  IO.writeData(0x00);    // -- Set to 0x21 to rotate 180 degrees
 
   // IO.writeCommand(0xBA);
   // //IO.writeData(0x05);   //GPIO[3:0] out 1
@@ -233,30 +232,30 @@ void GxCTRL_SSD1963::init()
 
   delay(10);
 
-  IO.startTransaction();
-  // SetWindow, physical addresses, even if default rotation is changed
-  IO.writeCommand(0x2a);
-  IO.writeAddrMSBfirst(0);
-  IO.writeAddrMSBfirst(physical_width - 1);
-  IO.writeCommand(0x2b);
-  IO.writeAddrMSBfirst(0);
-  IO.writeAddrMSBfirst(physical_height - 1);
+  // IO.startTransaction();
+  // // SetWindow, physical addresses, even if default rotation is changed
+  // IO.writeCommand(0x2a);
+  // IO.writeAddrMSBfirst(0);
+  // IO.writeAddrMSBfirst(physical_width - 1);
+  // IO.writeCommand(0x2b);
+  // IO.writeAddrMSBfirst(0);
+  // IO.writeAddrMSBfirst(physical_height - 1);
 
-  IO.writeCommand(0x29); //display on
+  // IO.writeCommand(0x29); //display on
 
-  IO.writeCommand(0xBE); //set PWM for B/L
-  IO.writeData(0x06);
-  IO.writeData(0xF0);
-  IO.writeData(0x01);
-  IO.writeData(0xF0);
-  IO.writeData(0x00);
-  IO.writeData(0x00);
+  // IO.writeCommand(0xBE); //set PWM for B/L
+  // IO.writeData(0x06);
+  // IO.writeData(0xF0);
+  // IO.writeData(0x01);
+  // IO.writeData(0xF0);
+  // IO.writeData(0x00);
+  // IO.writeData(0x00);
 
-  IO.writeCommand(0xD0);
-  IO.writeData(0x0D);
+  // IO.writeCommand(0xD0);
+  // IO.writeData(0x0D);
 
-  IO.writeCommand(0x2C);
-  IO.endTransaction();
+  // IO.writeCommand(0x2C);
+  // IO.endTransaction();
 }
 
 void GxCTRL_SSD1963::setWindowAddress(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1)
@@ -290,19 +289,31 @@ void GxCTRL_SSD1963::setRotation(uint8_t r)
   rotation = r;
   IO.startTransaction();
   IO.writeCommand(0x36);
-  switch (r & 3)
+  switch (r & 7)
   {
   case 0:
-    IO.writeData(0x33);
+    IO.writeData(0b00000000);
     break;
   case 1:
-    IO.writeData(0x2);
+    IO.writeData(0b10000000);
     break;
   case 2:
-    IO.writeData(0x20);
+    IO.writeData(0b01000000);
     break;
   case 3:
-    IO.writeData(0x11);
+    IO.writeData(0b11000000);
+    break;
+  case 4:
+    IO.writeData(0b00100000);
+    break;
+  case 5:
+    IO.writeData(0b10100000);
+    break;
+  case 6:
+    IO.writeData(0b01100000);
+    break;
+  case 7:
+    IO.writeData(0b11100000);
     break;
   }
   IO.endTransaction();
