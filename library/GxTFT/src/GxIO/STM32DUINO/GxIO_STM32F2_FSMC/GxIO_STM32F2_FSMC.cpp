@@ -10,6 +10,7 @@
 #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_STM32L2)
 
 #include "GxIO_STM32F2_FSMC.h"
+#include "sram.h" 
 
 //#include "stm32yyxx_ll_fsmc.h"
 //#include "stm32yyxx_ll_rcc.h" 

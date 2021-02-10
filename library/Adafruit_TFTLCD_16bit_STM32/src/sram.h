@@ -1,11 +1,17 @@
 #ifndef _SRAM_H_
 #define _SRAM_H_ 
 
-#include "stm32f2xx_hal_gpio.h"
-#include "stm32f2xx_hal_rcc.h"
+// #include "stm32f2xx_hal_gpio.h"
+// #include "stm32f2xx_hal_rcc.h"
+// #include "stm32yyxx_ll_fsmc.h"
+// #include "stm32f2xx_hal_dma.h"
+// #include "stm32f2xx_hal_sram.h"
+
+#include "stm32f4xx_hal_gpio.h"
+#include "stm32f4xx_hal_rcc.h"
 #include "stm32yyxx_ll_fsmc.h"
-#include "stm32f2xx_hal_dma.h"
-#include "stm32f2xx_hal_sram.h"
+#include "stm32f4xx_hal_dma.h"
+#include "stm32f4xx_hal_sram.h"
 
 
 #ifdef __cplusplus
