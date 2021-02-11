@@ -4,9 +4,7 @@
 #include "lvgl.h"
 #include "Adafruit_TFTLCD_16bit_STM32.h"
 #include "sram.h"
-#include "XPT2046_Touchscreen_swspi.h"
-
-XPT2046_Touchscreen ts(TOUCH_CS, TOUCH_IRQ); // Param 2 - Touch IRQ Pin - interrupt enabled polling
+#include "hasp_drv_xpt2046.h"
 
 static lv_disp_buf_t disp_buf;
 static lv_color_t buf[LV_HOR_RES_MAX * 10];
@@ -26,7 +24,7 @@ bool my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
   int16_t touchX, touchY;
 
-  bool touched = ts.touched();
+  bool touched = XPT2046_getXY(&touchX, &touchY, false);
 
   if (!touched)
   {
@@ -36,16 +34,15 @@ bool my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
   {
     data->state = LV_INDEV_STATE_PR;
 
-    TS_Point pt = ts.getPoint();
     /*Set the coordinates*/
-    data->point.x = pt.x;
-    data->point.y = pt.y;
+    data->point.x = touchX;
+    data->point.y = touchY;
 
     Serial.print("Data x");
-    Serial.println(pt.x);
+    Serial.println(touchX);
 
     Serial.print("Data y");
-    Serial.println( pt.y);
+    Serial.println(touchY);
   }
 
   return false; /*Return `false` because we are not buffering and no more data to read*/
@@ -67,6 +64,7 @@ void setup()
   // tft.begin(); /* TFT init */
   // tft.setRotation(1); /* Landscape orientation */
   fsmc_ssd1963_init(0, false);
+  XPT2046_init(0);
 
   uint16_t calData[5] = {275, 3620, 264, 3532, 1};
   //tft.setTouch(calData);
@@ -93,8 +91,8 @@ void setup()
 		 * https://github.com/lvgl/lv_examples*/
   //lv_ex_btn_1();
 
-  lv_demo_music();
-  //lv_demo_widgets();
+  //lv_demo_music();
+  lv_demo_widgets();
   //lv_demo_stress();
 }
 
