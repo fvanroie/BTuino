@@ -12,7 +12,7 @@ void setup()
 {
   Serial.begin(115200);
   ts.begin();
-  ts.setRotation(1);
+  ts.setRotation(0);
   while (!Serial && (millis() <= 1000))
     ;
   Serial.println("Setup done");
@@ -26,7 +26,7 @@ void loop()
     Serial.print("Pressure = ");
     Serial.print(p.z);
     Serial.print(", x = ");
-    Serial.print(p.x);
+    Serial.print(4095 - p.x);
     Serial.print(", y = ");
     Serial.print(p.y);
     delay(30);
