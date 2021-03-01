@@ -1,7 +1,7 @@
-# Arduino STM32DUINO support for BIGTREETECH TFT35_E3_V3.0 board
+# Arduino STM32DUINO support for BIGTREETECH TFT70_V3.0 board
 
 Board tested with STM32DUINO core library, version 1.9.0.
-Arduino IDE 1.8.12 and 1.8.13
+using PlatformIO
 
 # Table of Contents
 
@@ -10,48 +10,37 @@ Arduino IDE 1.8.12 and 1.8.13
 - [Installation](#installation)
 - [Using board hardware](#using-board-hardware)
 - [Board Hardware](#board-hardware)
-	- [Serial interface](#serial-interface)
-	- [I2C interface](#i2c-interface)
-	- [Buzzer](#buzzer)
-	- [LCD](#lcd)
-	- [Touchscreen](#touchscreen)
-	- [SDcard Connector](#sdcard-connector)
-	- [W25Q64 flash](#w25q64-flash)
-	- [Rotary encoder](#rotary-encoder)
-	- [USB port](#usb-port)
-	- [WS2812](#ws2812)
+	- [ ] [Serial interface](#serial-interface)
+	- [ ] [I2C interface](#i2c-interface)
+	- [ ] [Buzzer](#buzzer)
+	- [ ] [LCD](#lcd)
+	- [ ] [Touchscreen](#touchscreen)
+	- [ ] [SDcard Connector](#sdcard-connector)
+	- [ ] [W25Q64 flash](#w25q64-flash)
+	- [ ] [Rotary encoder](#rotary-encoder)
+	- [ ] [USB port](#usb-port)
+	- [ ] [WS2812](#ws2812)
 
 <!-- /MarkdownTOC -->
 
 
 # Installation
 
-1. Install Arduino core support for STM32 based boards.
-	https://github.com/stm32duino/wiki/wiki/Getting-Started
+1. Open the project directory in Visual Studio Code with PlatformIO.
 
-2. Go to the source files directory of the STM32 core.  
-Source files directory can be found here https://github.com/stm32duino/wiki/wiki/Where-are-sources#stm32-core-sources-files-location <br>
+2. The STM32duino core will be installed automatically, be patient
 
-Examples:
-- windows 10 path - %AppData%\Local\Arduino15\packages\STM32\hardware\stm32\1.9.0\
-- Linux path - /home/\<USERNAME\>/.arduino15/packages/STM32/hardware/stm32/1.9.0/   
-- Mac path - /Users/\<USERNAME\>/Library/Arduino15/packages/STM32/hardware/stm32/1.9.0/
+3. Restart Visual Studio Code after the installation of STM32duino
 
-where "1.9.0" is version of core library.  
+4. Click PlatformIO icon -> env:black_f407vg -> Build
 
-3. Copy file "boards.local.txt" to the STM32 core source files directory (see above).
+5. Download and install "STM32Cube programmer" from https://www.st.com/en/development-tools/stm32cubeprog.html
 
-4. Copy board directory 'BIGTREE_F207VCT6' with files to the 'variants' subdirectory.
-
-5. Restart Arduino IDE. Go to Tools -> Board:... -> 'Boards manager' and select '3D printer boards'.
-Select Tools -> 'Board part number:' -> BIGTREETECH TFT35-E3 V3.0
-6. Check Tools -> Upload method, should be set to "STM32Cube programmer(SWD)"
-7. Download and install "STM32Cube programmer" from https://www.st.com/en/development-tools/stm32cubeprog.html
-Arduino IDE uses it to upload sketches to the board. (see the following instructions for MacOS: https://community.st.com/s/question/0D50X0000BmnqrB/how-to-run-stm32cubeprogrammer-on-macos-catalina-10151-19b88)
+6. Upload the firmware.bin file using STM32Cude Programmer
 
 # Using board hardware
 
-Original description: https://github.com/bigtreetech/BTT-TFT35-E3-V3.0/tree/master/Hardware
+Original description: https://github.com/bigtreetech/BIGTREETECH-TouchScreenHardware/tree/master/BTT%20TFT70%20V3.0
 Pins that can be used in projects can be found in [pins-names.jpg](docs/pins-names.jpg).
 (Please note that all connectors are displayed on the LCD side)
 
