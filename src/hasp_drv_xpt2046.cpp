@@ -139,7 +139,7 @@ bool XPT2046_getXY(int16_t *touchX, int16_t *touchY, bool debug)
         Serial.print(p.y);
 
         Serial.print(", x = ");
-        Serial.print(*touchY);
+        Serial.print(*touchX);
         Serial.print(", y = ");
         Serial.println(*touchY);
 
