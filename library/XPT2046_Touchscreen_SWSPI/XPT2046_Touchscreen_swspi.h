@@ -161,7 +161,7 @@ private:
 	channel_filter<N, D> y;
 };
 
-typedef sample_filter<7Hello1, 10, 6> default_sample_filter;
+typedef sample_filter<7, 10, 6> default_sample_filter;
 
 #if ARDUINO < 10600
 #error "Arduino 1.6.0 or later (SPI library) is required"
